@@ -1,4 +1,7 @@
 import random
+import pygame
+
+pygame.init()
 
 deck = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 user_wallet = 100
@@ -10,19 +13,19 @@ house_card_2 = 0
 print("Welcome to the casino!")
 
 def game_over():
+    print("\n")
     choice = input("Would you like to play again? Press 'y' for yes and 'n' for no. ")
     if choice == "y":
-        pass
-    else:
-        break
+        start_sequence()
 
 def house_turn_to_draw():
     global user_total
     global house_total
-    #card_1 and card_2 references here are local to another function, how to make them global?
     print("The house had " + str(house_card_1) + " and the hole card, which was...")
+    pygame.time.delay(2000)
     print(str(house_card_2) + "!")
-    print("This means the house total was " + str(house_total) + ".")
+    pygame.time.delay(1500)
+    print("This means the current house total is " + str(house_total) + ".")
     print("\n")
     if house_total == 21:
         print("House wins with a Blackjack!")
@@ -33,9 +36,11 @@ def house_turn_to_draw():
     else:
         while house_total < 17:
             card = random.choice(deck)
+            pygame.time.delay(3000)
             print("House's next card is... " + str(card))
             house_total += card
             print("New house total = " + str(house_total))
+            pygame.time.delay(2000)
             if house_total > 21:
                 print("House busts, you won!")
                 game_over()
@@ -73,6 +78,8 @@ def hit():
     global user_total
     card = random.choice(deck)
     user_total += card
+    print("Your next card is...")
+    pygame.time.delay(2000)
     print(card)
     print("\n")
     if user_total > 21:
@@ -88,6 +95,7 @@ def stand():
     global user_total
     print("Okay, your total stands at " + str(user_total) + ".")
     print("\n")
+    pygame.time.delay(2000)
     house_turn_to_draw()
 
 def double():
@@ -106,19 +114,24 @@ def choice():
         choice()
 
 def start_sequence():
-    print("You currently have " + str(user_wallet) + " dollars in your wallet.")
     print("Let's begin.")
     print("\n")
     initial_hand = first_hand()
-    print("Your hand is: ")
+    print("Your hand is... ")
+    pygame.time.delay(3000)
     print(initial_hand)
+    pygame.time.delay(2000)
     print("\n")
-    print("Here is the dealer's hand: ")
+    print("Here is the dealer's hand... ")
     dealer_hand = house_initial()
+    pygame.time.delay(3000)
     print(dealer_hand)
-    print("Note that the hole card has been drawn but will only be revealed after you stop.")
+    print("(Note that the hole card has been drawn but will only be revealed after you stop.)")
     print("\n")
+    pygame.time.delay(3000)
     print("Alright, time to play!")
+    print("\n")
+    pygame.time.delay(1000)
     choice()
 
 
