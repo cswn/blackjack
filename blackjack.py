@@ -13,10 +13,16 @@ house_card_2 = 0
 print("Welcome to the casino!")
 
 def game_over():
+    global user_total
+    global house_total
     print("\n")
     choice = input("Would you like to play again? Press 'y' for yes and 'n' for no. ")
     if choice == "y":
+        user_total = 0
+        house_total = 0
         start_sequence()
+    else:
+        print("Goodbye.")
 
 def house_turn_to_draw():
     global user_total
